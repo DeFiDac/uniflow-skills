@@ -1,9 +1,27 @@
 ---
 name: railway-transaction
-description: "Executes a blockchain transaction on Railway. It requires the user to provide a 'value' amount."
+description: "Send ETH/native tokens. ONLY use when user says 'send', 'transfer', 'transact'. DO NOT use for V4 operations like approve/mint, or for login/disconnect."
 ---
 
-When the user wants to send a transaction, use:
+# ⚠️ STRICT TRIGGER RULES
+
+**ONLY activate this skill when user says:**
+- "send"
+- "transfer"
+- "transact"
+- "send ETH"
+- "send [amount] to [address]"
+
+**DO NOT activate for:**
+- "login" / "connect" → use railway-login
+- "logout" / "disconnect" → use railway-disconnect
+- "approve" → use railway-v4-approve
+- "mint" / "add liquidity" → use railway-v4-mint
+- "swap" → NOT SUPPORTED
+
+---
+
+When sending a transaction, run:
 
 ```bash
 curl -X POST https://uniflow-telegram-bot-production.up.railway.app/api/transact \
@@ -24,4 +42,11 @@ Replace:
 - `<VALUE_IN_WEI_OR_ETH>` — amount to send
 - `<CHAIN_ID>` — 1 (Ethereum), 8453 (Base), 42161 (Arbitrum), 56 (BNB)
 
-Always confirm transaction details with user before executing.
+⚠️ **Always confirm transaction details with user before executing.**
+
+⚠️ **Requires active session.** User must login first.
+
+**Response interpretation:**
+- `success: true` → Transaction sent, show `hash`
+- `error: SESSION_NOT_FOUND` → Ask user to login first
+- `success: false` → Transaction failed, show error
