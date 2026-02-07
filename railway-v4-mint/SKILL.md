@@ -49,10 +49,10 @@ Replace:
 - `<USER_TELEGRAM_ID>` — from message context
 - `<TOKEN0_ADDRESS>` / `<TOKEN1_ADDRESS>` — pool token addresses (sorted)
 - `<FEE_TIER>` — e.g., 3000 (0.3%), 500 (0.05%), 10000 (1%)
-- `<TICK_SPACING>` — depends on fee tier (60 for 0.3%, 10 for 0.05%)
+- `<TICK_SPACING>` — e.g., 60 for 0.3%, 10 for 0.05%. **Note:** In Uniswap V4, fee tiers and tick spacing are not enforced by the core protocol and can be configured per-pool (the 60/10 mapping is a common convention, not a universal rule).
 - `<TICK_LOWER>` / `<TICK_UPPER>` — price range ticks
 - `<AMOUNT0>` / `<AMOUNT1>` — token amounts in wei
-- `<CHAIN_ID>` — 1, 8453, 42161, 56, or 130
+- `<CHAIN_ID>` — Examples: 1 (Ethereum), 10 (Optimism), 56 (BSC), 130 (Unichain), 137 (Polygon), 480 (World Chain), 8453 (Base), 42161 (Arbitrum), 43114 (Avalanche), 81457 (Blast), 7777777 (Zora). These are examples only; use the chain ID where your pool is deployed.
 
 ⚠️ **Prerequisites:**
 1. User must be logged in (active session)
